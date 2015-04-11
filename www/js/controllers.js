@@ -86,7 +86,7 @@ angular.module('starter.controllers', [])
                             template: 'Form is OK!'
                         });
                     }
-                }
+                });
             }
 
         });
