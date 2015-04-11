@@ -1,0 +1,51 @@
+<ion-view view-title="Report">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">Name of alert</div>
+      <div class="item item-body">
+        <div class="item item-input-inset">
+          <label class="item-input-wrapper">
+            <input type="text" id="name-of-alert" placeholder="Name...">
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Disease or parasite</div>
+      <div class="item item-body">
+        <div>
+          <li class="item item-toggle">
+             Disease
+             <label class="toggle toggle-assertive">
+               <input id="disease" type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+          <li class="item item-toggle">
+             Parasite
+             <label class="toggle toggle-assertive">
+               <input id="parasite" type="checkbox">
+               <div class="track">
+                 <div class="handle"></div>
+               </div>
+             </label>
+          </li>
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Images</div>
+      <div class="item item-body">
+        <div>
+          <button id="take-image" class="button button-block button-positive" style="background-color:dimgrey;">Take image</button>
+          <button id="upload-image" class="button button-block button-positive" style="background-color:dimgrey;">Upload image</button>
+        </div>
+      </div>
+    </div>
+    <button id="send-alert" class="button button-full button-positive" style="background-color:goldenrod; display:none;">
+      <b>Send alert</b>
+    </button>
+  </ion-content>
+</ion-view>
