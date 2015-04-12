@@ -3285,7 +3285,7 @@ angular.module('ngCordova.plugins.googleMap', [])
           $window.plugins.googleplus.login(
           {
             'iOSApiKey': iosKey
-            // there is no API key for Android; you app is wired to the Google+ API by 
+            // there is no API key for Android; you app is wired to the Google+ API by
             //listing your package name in the google dev console and signing your apk
           },
           function (response) {
@@ -3308,7 +3308,7 @@ angular.module('ngCordova.plugins.googleMap', [])
           $window.plugins.googleplus.trySilentLogin(
           {
             'iOSApiKey': iosKey
-            // there is no API key for Android; you app is wired to the Google+ API by 
+            // there is no API key for Android; you app is wired to the Google+ API by
             //listing your package name in the google dev console and signing your apk
           },
           function (response) {
