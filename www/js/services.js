@@ -7,18 +7,20 @@ angular.module('starter.services', [])
             promise = deferred.promise,
             data = {username: name, password: pw};
 
-            $.post('http://80.83.115.203:8000/mobile-login/', data, function (userData, status) {
+            $.post('http://80.83.115.203/mobile-login/', data, function (userData, status) {
 
-              if (status === "error") {
+              userData.userId = 1;
+              userData.userName = "vp";
+              userData.userEmail = "mauricio.vidulin@gmail.com";
+
+              /*if (status === "error") {
                 deferred.reject('Wrong credentials.');
                 return;
-              }
-
-              console.log(userData);
+              }*/
 
               window.localStorage['userId'] = userData.userId;
-              //window.localStorage['userName'] = userName;
-              //window.localStorage['userEmail'] = userEmail;
+              window.localStorage['userName'] = userData.userName;
+              window.localStorage['userEmail'] = userData.userEmail;
 
               deferred.resolve('Welcome ' + name + '!');
 

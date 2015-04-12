@@ -17,11 +17,20 @@ angular.module('starter.controllers', [])
 
 .controller('ReportCtrl', function($scope, $ionicPopup, Camera) {
     $("#take-image").click(function () {
+        var image;
         /*Camera.getPicture().then(function (imageURI) {
             console.log(imageURI);
         }, function (err) {
             console.log(err);
-        });*/
+        });
+
+        if (!image) {
+            $ionicPopup.alert({
+                title: 'No image!',
+                template: 'Please choose image!'
+            });
+            return;
+        }*/
         $("#send-alert")
         .css("display")
         .click(function () {
