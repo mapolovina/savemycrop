@@ -17,7 +17,6 @@
   <preference name="SplashScreenDelay" value="3000"/>
 
   <gap:plugin name="org.apache.cordova.camera" />
-  <gap:plugin name="org.apache.cordova.media-capture" />
 
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
