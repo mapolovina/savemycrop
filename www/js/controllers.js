@@ -55,14 +55,16 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 
     $("#take-image").click(function () {
-        $cordovaCamera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
-            destinationType: destinationType.DATA_URL });
+        $cordovaCamera.getPicture(onPhotoDataSuccess, onFail, { quality: 50
+            //,destinationType: destinationType.DATA_URL
+        });
     });
 
     $("#upload-image").click(function () {
-        $cordovaCamera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
-            destinationType: destinationType.FILE_URI,
-            sourceType: pictureSource.SAVEDPHOTOALBUM });
+        $cordovaCamera.getPicture(onPhotoURISuccess, onFail, { quality: 50
+            /*,destinationType: destinationType.FILE_URI,
+            sourceType: pictureSource.SAVEDPHOTOALBUM*/
+        });
     });
 
     function imageIsUploaded () {
