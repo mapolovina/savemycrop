@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 })
 
-.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera, Camera, $cordovaFile) {
+.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera, $cordovaFile) {
 
     var destinationType = $cordovaCamera.DestinationType,
     pictureSource = $cordovaCamera.PictureSourceType;
