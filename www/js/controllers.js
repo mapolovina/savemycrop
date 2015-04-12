@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
 .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
     $scope.data = {};
@@ -15,10 +15,10 @@ angular.module('starter.controllers', [])
     }
 })
 
-.controller('ReportCtrl', function($scope, $ionicPopup, Camera) {
+.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera, Camera) {
 
-    var destinationType = navigator.camera.DestinationType,
-    pictureSource = navigator.camera.PictureSourceType;
+    var destinationType = $cordovaCamera.DestinationType,
+    pictureSource = $cordovaCamera.PictureSourceType;
 
     function onPhotoDataSuccess (imageData) {
       var smallImage = document.getElementById('image-for-upload');
@@ -42,12 +42,12 @@ angular.module('starter.controllers', [])
     }
 
     $("#take-image").click(function () {
-        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+        $cordovaCamera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
             destinationType: destinationType.DATA_URL });
     });
 
     $("#upload-image").click(function () {
-        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+        $cordovaCamera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
             destinationType: destinationType.FILE_URI,
             sourceType: pictureSource.SAVEDPHOTOALBUM });
     });
