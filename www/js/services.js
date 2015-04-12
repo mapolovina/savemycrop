@@ -5,9 +5,10 @@ angular.module('starter.services', [])
         loginUser: function(name, pw) {
             var deferred = $q.defer();
             promise = deferred.promise,
-            data = {username: name, password: pw};
+            data = {username: name, password: pw},
+            userData = {};
 
-            $.post('http://80.83.115.203/mobile-login/', data, function (userData, status) {
+            //$.post('http://80.83.115.203/mobile-login/', data, function (userData, status) {
 
               userData.userId = 1;
               userData.userName = "vp";
@@ -24,7 +25,7 @@ angular.module('starter.services', [])
 
               deferred.resolve('Welcome ' + name + '!');
 
-            },"json");
+            //},"json");
 
             promise.success = function(fn) {
                 promise.then(fn);
