@@ -16,36 +16,57 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ReportCtrl', function($scope, $ionicPopup, Camera) {
-    $("#take-image").click(function () {
-        var image;
-        /*Camera.getPicture().then(function (imageURI) {
-            console.log(imageURI);
-        }, function (err) {
-            console.log(err);
-        });
 
-        if (!image) {
-            $ionicPopup.alert({
-                title: 'No image!',
-                template: 'Please choose image!'
-            });
-            return;
-        }*/
-        $("#send-alert")
-        .css("display")
-        .click(function () {
+    var destinationType = navigator.camera.DestinationType,
+    pictureSource = navigator.camera.PictureSourceType;
+
+    function onPhotoDataSuccess (imageData) {
+      var smallImage = document.getElementById('image-for-upload');
+      smallImage.style.display = 'block';
+      smallImage.src = "data:image/jpeg;base64," + imageData;
+      //imageIsUploaded();
+    }
+
+    function onPhotoURISuccess (imageURI) {
+      var largeImage = document.getElementById('image-for-upload');
+      largeImage.style.display = 'block';
+      largeImage.src = imageURI;
+      //imageIsUploaded();
+    }
+
+    function onFail (message) {
+        $ionicPopup.alert({
+            title: 'No image!',
+            template: 'Please choose image!'
+        });
+    }
+
+    $("#take-image").click(function () {
+        navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
+            destinationType: destinationType.DATA_URL });
+    });
+
+    $("#upload-image").click(function () {
+        navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
+            destinationType: destinationType.FILE_URI,
+            sourceType: pictureSource.SAVEDPHOTOALBUM });
+    });
+
+    function imageIsUploaded () {
+
+        $("#send-alert").show();
+        $("#send-alert").click(function () {
             var form = {},
             date = new Date(),
             year = date.getFullYear(),
             month = date.getMonth() + 1,
             day = date.getDate(),
-            location,
             alertType,
             disease = $("#disease").val(),
             parasite = $("#parasite").val();
 
             function geolocationSuccess (location) {
-                location = location;
+                next(location);
             }
 
             function geolocationError (error) {
@@ -58,48 +79,52 @@ angular.module('starter.controllers', [])
 
             navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
 
-            if (!$("#name-of-alert").val()) {
-                $ionicPopup.alert({
-                    title: 'Alert',
-                    template: 'Please write alert name!'
-                });
-                return;
-            }
+            function next (location) {
+                if (!$("#name-of-alert").val()) {
+                    $ionicPopup.alert({
+                        title: 'Alert',
+                        template: 'Please write alert name!'
+                    });
+                    return;
+                }
 
-            if (!disease) {
-                alertType = parasite ? parasite : "undefined";
-            } else {
-                alertType = disease;
-            }
+                if (!disease) {
+                    alertType = parasite ? "parasite" : "undefined";
+                } else {
+                    alertType = "disease";
+                }
 
-            form.alertName = $("#name-of-alert").val();
-            form.alertType = alertType;
-            form.date = year + "-" + month + "-" + day;
-            form.geolocation = {
-                lat: location.coords.latitude,
-                lon: location.coords.longitude
-            };
+                form.alertName = $("#name-of-alert").val();
+                form.alertType = alertType;
+                form.date = year + "-" + month + "-" + day;
+                form.geolocation = {
+                    lat: location.coords.latitude,
+                    lon: location.coords.longitude
+                };
 
-            if (form.alertName && form.alertType && form.date && form.geolocation && localStorage['userId']) {
-                form.userId = localStorage['userId'];
-                $.post('http://80.83.115.203:8000/mobile-add-entry/', form, function (status) {
-                    if (status === "error") {
-                        $ionicPopup.alert({
-                            title: 'Error',
-                            template: 'Check your connection to server!'
-                        });
-                        return;
-                    } else {
-                        $ionicPopup.alert({
-                            title: 'OK',
-                            template: 'Form is OK!'
-                        });
-                    }
-                });
+                if (form.alertName && form.alertType && form.date && form.geolocation && localStorage['userId']) {
+                    form.userId = localStorage['userId'];
+                    console.log(form);
+                    $.post('http://80.83.115.203:8000/mobile-add-entry/', form, function (status) {
+                        if (status === "error") {
+                            $ionicPopup.alert({
+                                title: 'Error',
+                                template: 'Check your connection to server!'
+                            });
+                            return;
+                        } else {
+                            $ionicPopup.alert({
+                                title: 'OK',
+                                template: 'Form is OK!'
+                            });
+                        }
+                    });
+                }
             }
 
         });
-    });
+    }
+
 })
 
 .controller('MapCtrl', function($scope, MapService) {
