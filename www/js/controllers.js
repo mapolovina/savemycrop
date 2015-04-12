@@ -28,11 +28,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 })
 
-.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera, $cordovaFile) {
+.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera) {
 
-    $ionicPlatform.ready(function() {
-        debugger;
-    }
+    debugger;
     var destinationType = $cordovaCamera.DestinationType,
     pictureSource = $cordovaCamera.PictureSourceType;
 
@@ -58,6 +56,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 
     $("#take-image").click(function () {
+        debugger;
         $cordovaCamera.getPicture(onPhotoDataSuccess, onFail, { quality: 50
             //,destinationType: destinationType.DATA_URL
         });
