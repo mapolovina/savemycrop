@@ -40,7 +40,7 @@ angular.module('starter.services', [])
     }
 })
 
-.service('Camera', function ($q) {
+/*.service('Camera', function ($q) {
   return {
     getPicture: function (options) {
       var q = $q.defer();
@@ -52,7 +52,7 @@ angular.module('starter.services', [])
       return q.promise;
     }
   }
-})
+})*/
 
 .service('MapService', function($q) {
   return {
