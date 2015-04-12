@@ -28,24 +28,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 })
 
-.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera) {
+.controller('ReportCtrl', function($scope, $ionicPopup, $cordovaCamera, $state) {
 
-    debugger;
-    var destinationType = $cordovaCamera.DestinationType,
-    pictureSource = $cordovaCamera.PictureSourceType;
+    var destinationType = ""; //$cordovaCamera.DestinationType,
+    pictureSource = ""; //$cordovaCamera.PictureSourceType;
 
     function onPhotoDataSuccess (imageData) {
       var smallImage = document.getElementById('image-for-upload');
       smallImage.style.display = 'block';
       smallImage.src = "data:image/jpeg;base64," + imageData;
-      //imageIsUploaded();
+      imageIsUploaded();
     }
 
     function onPhotoURISuccess (imageURI) {
       var largeImage = document.getElementById('image-for-upload');
       largeImage.style.display = 'block';
       largeImage.src = imageURI;
-      //imageIsUploaded();
+      imageIsUploaded();
     }
 
     function onFail (message) {
@@ -56,16 +55,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     }
 
     $("#take-image").click(function () {
-        debugger;
         $cordovaCamera.getPicture(onPhotoDataSuccess, onFail, { quality: 50
-            //,destinationType: destinationType.DATA_URL
+            ,destinationType: destinationType.DATA_URL
         });
     });
 
     $("#upload-image").click(function () {
         $cordovaCamera.getPicture(onPhotoURISuccess, onFail, { quality: 50
-            /*,destinationType: destinationType.FILE_URI,
-            sourceType: pictureSource.SAVEDPHOTOALBUM*/
+            ,destinationType: destinationType.FILE_URI,
+            sourceType: pictureSource.SAVEDPHOTOALBUM
         });
     });
 
@@ -134,6 +132,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                                 title: 'OK',
                                 template: 'Form is OK!'
                             });
+                            $state.go('tab.report');
                         }
                     });
                 }
@@ -148,8 +147,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.data = {};
     $scope.initMap = function () {
         MapService.init();
+        //MapService.setLocations();
     }
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, Account) {
+    $scope.data = {};
+
+    Account.init();
 });
